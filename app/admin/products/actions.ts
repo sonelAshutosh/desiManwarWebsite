@@ -161,6 +161,7 @@ export async function createProduct(formData: FormData): Promise<{
     })
 
     revalidatePath('/admin/products')
+    revalidatePath('/products')
 
     return {
       status: 'success',
@@ -178,7 +179,7 @@ export async function createProduct(formData: FormData): Promise<{
 
 export async function updateProduct(
   productId: string,
-  formData: FormData
+  formData: FormData,
 ): Promise<{
   status: 'success' | 'error'
   message: string
@@ -241,10 +242,10 @@ export async function updateProduct(
 
     // Handle specifications
     const specificationTitles = formData.getAll(
-      'specification.title[]'
+      'specification.title[]',
     ) as string[]
     const specificationValues = formData.getAll(
-      'specification.value[]'
+      'specification.value[]',
     ) as string[]
     if (
       specificationTitles &&
@@ -275,7 +276,7 @@ export async function updateProduct(
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
       { $set: updateData },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     ).lean()
 
     if (!updatedProduct) {
@@ -286,6 +287,7 @@ export async function updateProduct(
     }
 
     revalidatePath('/admin/products')
+    revalidatePath('/products')
     revalidatePath(`/products/${updatedProduct.slug}`)
 
     return {
@@ -319,6 +321,7 @@ export async function deleteProduct(productId: string): Promise<{
     }
 
     revalidatePath('/admin/products')
+    revalidatePath('/products')
 
     return {
       status: 'success',

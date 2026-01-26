@@ -1,6 +1,9 @@
 import { getAllProducts } from '@/app/admin/products/actions'
 import ProductCard from './ProductCard'
 
+// Enable ISR - revalidate every 60 seconds
+export const revalidate = 60
+
 export default async function ProductsPage() {
   const { products } = await getAllProducts()
 
