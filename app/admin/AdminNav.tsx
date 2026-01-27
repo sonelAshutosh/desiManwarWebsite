@@ -15,6 +15,7 @@ import {
   UserCircle,
   Mail,
   LogOut,
+  FileText,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -79,6 +80,11 @@ const navItems: NavItem[] = [
     title: 'Members',
     url: '/admin/members',
     icon: UserCircle,
+  },
+  {
+    title: 'Blogs',
+    url: '/admin/blogs',
+    icon: FileText,
   },
 ]
 
