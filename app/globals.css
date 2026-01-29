@@ -268,3 +268,39 @@ body {
   border-radius: 0.5rem;
   margin: 1em 0;
 }
+
+/* Blog Content List Styles */
+article .prose ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin: 1rem 0 !important;
+}
+
+article .prose ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin: 1rem 0 !important;
+}
+
+article .prose li {
+  margin: 0.5rem 0 !important;
+  line-height: 1.75 !important;
+  display: list-item !important;
+}
+
+article .prose ul ul,
+article .prose ol ol,
+article .prose ul ol,
+article .prose ol ul {
+  margin: 0.5rem 0 !important;
+}
+
+/* Blog Content Text Justification and Line Spacing */
+article .prose p {
+  text-align: justify !important;
+  line-height: 2 !important;
+}
+
+article .prose li {
+  text-align: justify !important;
+}

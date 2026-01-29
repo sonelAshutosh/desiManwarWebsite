@@ -123,12 +123,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
         {/* Featured Image */}
         {blog.featuredImage && (
-          <div className="relative w-full h-96 md:h-[500px] rounded-lg overflow-hidden mb-8 border border-border">
+          <div className="w-full rounded-lg overflow-hidden mb-8 border border-border">
             <Image
               src={blog.featuredImage}
               alt={blog.title}
-              fill
-              className="object-cover"
+              width={1920}
+              height={1080}
+              className="w-full h-auto"
               priority
             />
           </div>
