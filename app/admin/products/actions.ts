@@ -261,6 +261,7 @@ export async function updateProduct(
     }
 
     // Handle slug regeneration if name changes
+    const oldSlug = product.slug // Store old slug for revalidation
     if (updateData.name && updateData.name !== product.name) {
       const newSlug = slugify(updateData.name)
       const existingProduct = await Product.findOne({ slug: newSlug })
@@ -286,9 +287,13 @@ export async function updateProduct(
       }
     }
 
+    // Revalidate paths - including old slug if it changed
     revalidatePath('/admin/products')
     revalidatePath('/products')
     revalidatePath(`/products/${updatedProduct.slug}`)
+    if (oldSlug !== updatedProduct.slug) {
+      revalidatePath(`/products/${oldSlug}`) // Clean up old URL
+    }
 
     return {
       status: 'success',

@@ -1,8 +1,8 @@
 import { getPublishedBlogs } from '@/app/admin/blogs/actions'
 import BlogCard from './BlogCard'
 
-// Enable ISR - revalidate every 60 seconds
-export const revalidate = 60
+// Using on-demand revalidation via revalidatePath() in admin actions
+// No time-based revalidation needed - pages regenerate only when content changes
 
 export default async function BlogsPage() {
   const { blogs } = await getPublishedBlogs()

@@ -7,8 +7,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
-// Enable ISR - revalidate every 60 seconds
-export const revalidate = 60
+// Using on-demand revalidation via revalidatePath() in admin actions
+// No time-based revalidation needed - pages regenerate only when content changes
 
 interface BlogPageProps {
   params: {

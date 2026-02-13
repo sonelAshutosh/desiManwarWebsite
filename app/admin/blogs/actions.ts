@@ -345,6 +345,7 @@ export async function updateBlog(
     }
 
     // Handle slug regeneration if title changes
+    const oldSlug = blog.slug // Store old slug for revalidation
     if (updateData.title && updateData.title !== blog.title) {
       const newSlug = slugify(updateData.title)
       const existingBlog = await Blog.findOne({ slug: newSlug })
@@ -370,9 +371,13 @@ export async function updateBlog(
       }
     }
 
+    // Revalidate paths - including old slug if it changed
     revalidatePath('/admin/blogs')
     revalidatePath('/blogs')
     revalidatePath(`/blogs/${updatedBlog.slug}`)
+    if (oldSlug !== updatedBlog.slug) {
+      revalidatePath(`/blogs/${oldSlug}`) // Clean up old URL
+    }
 
     return {
       status: 'success',
