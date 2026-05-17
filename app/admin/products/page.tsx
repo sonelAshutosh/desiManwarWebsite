@@ -1101,7 +1101,6 @@ export default function ProductsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Image</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Priority</TableHead>
@@ -1119,22 +1118,6 @@ export default function ProductsPage() {
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => handleRowClick(product)}
                   >
-                    <TableCell>
-                      <div className="w-16 h-16 relative rounded-md overflow-hidden border">
-                        {product.image ? (
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-muted flex items-center justify-center text-xs text-muted-foreground">
-                            No Image
-                          </div>
-                        )}
-                      </div>
-                    </TableCell>
                     <TableCell className="font-medium">{product.name}</TableCell>
                     <TableCell>{product.category}</TableCell>
                     <TableCell>{product.priority}</TableCell>

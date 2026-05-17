@@ -61,6 +61,7 @@ export async function createTestimonial(
     await dbConnect()
     const newTestimonial = await Testimonial.create(data)
     revalidatePath('/admin/testimonials')
+    revalidatePath('/')
     return {
       success: true,
       message: 'Testimonial created successfully',
@@ -103,6 +104,7 @@ export async function updateTestimonial(
     }
 
     revalidatePath('/admin/testimonials')
+    revalidatePath('/')
 
     return {
       success: true,
@@ -132,6 +134,7 @@ export async function deleteTestimonial(testimonialId: string): Promise<{
       }
     }
     revalidatePath('/admin/testimonials')
+    revalidatePath('/')
     return {
       success: true,
       message: 'Testimonial deleted successfully',

@@ -24,6 +24,7 @@ export async function getAllProducts(): Promise<{
     await dbConnect()
 
     const products = await Product.find({})
+      .select('-image') // Exclude image field to reduce payload size
       .sort({ priority: 1, createdAt: -1 })
       .lean()
 
@@ -37,7 +38,6 @@ export async function getAllProducts(): Promise<{
         category: product.category,
         priority: product.priority,
         productVisibility: product.visibility.productVisibility,
-        image: product.image,
         createdAt: product.createdAt?.toLocaleDateString(),
       })),
     }
@@ -162,6 +162,7 @@ export async function createProduct(formData: FormData): Promise<{
 
     revalidatePath('/admin/products')
     revalidatePath('/products')
+    revalidatePath('/')
 
     return {
       status: 'success',
@@ -181,7 +182,7 @@ export async function updateProduct(
   productId: string,
   formData: FormData,
 ): Promise<{
-  status: 'success' | 'error'
+  status: 'success' | 'error' | 'pending'
   message: string
   product?: any
 }> {
@@ -291,6 +292,7 @@ export async function updateProduct(
     revalidatePath('/admin/products')
     revalidatePath('/products')
     revalidatePath(`/products/${updatedProduct.slug}`)
+    revalidatePath('/')
     if (oldSlug !== updatedProduct.slug) {
       revalidatePath(`/products/${oldSlug}`) // Clean up old URL
     }
@@ -327,6 +329,7 @@ export async function deleteProduct(productId: string): Promise<{
 
     revalidatePath('/admin/products')
     revalidatePath('/products')
+    revalidatePath('/')
 
     return {
       status: 'success',

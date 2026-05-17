@@ -57,6 +57,7 @@ export async function createMember(data: Partial<IMember>): Promise<{
     await dbConnect()
     const newMember = await Member.create(data)
     revalidatePath('/admin/members')
+    revalidatePath('/')
     return {
       success: true,
       message: 'Member created successfully',
@@ -97,6 +98,7 @@ export async function updateMember(
       }
     }
     revalidatePath('/admin/members')
+    revalidatePath('/')
     return {
       success: true,
       message: 'Member updated successfully',
@@ -125,6 +127,7 @@ export async function deleteMember(memberId: string): Promise<{
       }
     }
     revalidatePath('/admin/members')
+    revalidatePath('/')
     return {
       success: true,
       message: 'Member deleted successfully',
