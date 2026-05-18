@@ -15,7 +15,7 @@ function slugify(text: string): string {
     .replace(/-+$/, '') // Trim - from end of text
 }
 
-export async function getAllProducts(): Promise<{
+export async function getAllProducts(includeImage: boolean = true): Promise<{
   status: 'success' | 'error'
   products?: any[]
   message?: string
@@ -23,8 +23,13 @@ export async function getAllProducts(): Promise<{
   try {
     await dbConnect()
 
-    const products = await Product.find({})
-      .select('-image') // Exclude image field to reduce payload size
+    let query = Product.find({})
+    
+    if (!includeImage) {
+      query = query.select('-image') // Exclude image field to reduce payload size
+    }
+
+    const products = await query
       .sort({ priority: 1, createdAt: -1 })
       .lean()
 
@@ -39,6 +44,7 @@ export async function getAllProducts(): Promise<{
         priority: product.priority,
         productVisibility: product.visibility.productVisibility,
         createdAt: product.createdAt?.toLocaleDateString(),
+        ...(includeImage && { image: product.image }),
       })),
     }
   } catch (error) {

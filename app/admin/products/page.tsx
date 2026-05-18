@@ -110,7 +110,7 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     setIsLoading(true)
     try {
-      const productResult = await getAllProducts()
+      const productResult = await getAllProducts(false)
 
       if (productResult.status === 'success' && productResult.products) {
         setProducts(productResult.products)
