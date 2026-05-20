@@ -15,10 +15,13 @@ export default function About() {
                 About Us
               </h2>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Our mission is to bring the authentic flavors of India to your
-                table, creating a nostalgic and memorable culinary experience. We
-                are dedicated to delivering exceptional customer service, from
-                seamless order processing to efficient delivery.
+                Desi Manwar Pvt Ltd is an Indian exporter of Basmati Rice,
+                Sugar, Spices, Pulses, and agricultural commodities serving
+                importers, distributors, and wholesale buyers worldwide. Our
+                mission is to bring the authentic flavors of India to your
+                table, creating a nostalgic and memorable culinary experience.
+                We are dedicated to delivering exceptional customer service,
+                from seamless order processing to efficient delivery.
               </p>
             </div>
 
